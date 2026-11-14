@@ -1,6 +1,6 @@
 # Bumi 机器人笔记本外挂部署手册
 
-> 作者：祁果 ｜ 仓库：[77-GGG/bumi-handbooks](https://github.com/77-GGG/bumi-handbooks) ｜ PDF 版：[bumi-deploy-handbook.pdf](../bumi-deploy-handbook.pdf)
+> 作者：祁果 ｜ 仓库：[77-GGG/bumi-handbooks](https://github.com/77-GGG/bumi-handbooks) ｜ PDF 版：[bumi-deploy-handbook.pdf](bumi-deploy-handbook.pdf)
 >
 > 本文件由 LaTeX 工程 `deploy-handbook/` 的章节源码逐段转换而成，内容与 PDF（40 页）一致，供全文检索与 AI 阅读使用。
 

@@ -1,6 +1,6 @@
 # Bumi 机器人 test_policy.py 笔记本外挂部署分步指南（含 FAQ）
 
-> **说明**：这是部署手册成书之前的分步速查（9 步流程 + FAQ），保留下来供快速查阅。与本书正文不一致时，以 [bumi-deploy-handbook.md](bumi-deploy-handbook.md) 和 PDF 为准。
+> **说明**：这是部署手册成书之前的分步速查（9 步流程 + FAQ），保留下来供快速查阅。与本书正文不一致时，以 [bumi-deploy-handbook.md](../bumi-deploy-handbook.md) 和 PDF 为准。
 
 > 依据官方手册《Bumi 综合使用文档》（noetixrobotics.feishu.cn/docx/As2adPO27odPBfxQw1ucK6N4nNe）、《SDK 编译环境部署流程》（noetixrobotics.feishu.cn/docx/PP2BdXkSUoQ2VOxctJKcEdHanAg）以及本 SDK 源码（`examples/py/test_policy.py`、`config/dds.xml`、`config/bumi_ac.yaml`）整理。
 >

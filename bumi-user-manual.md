@@ -1,6 +1,6 @@
 # Bumi 机器人综合使用手册
 
-> 作者：祁果 ｜ 仓库：[77-GGG/bumi-handbooks](https://github.com/77-GGG/bumi-handbooks) ｜ PDF 版：[bumi-user-manual.pdf](../bumi-user-manual.pdf)
+> 作者：祁果 ｜ 仓库：[77-GGG/bumi-handbooks](https://github.com/77-GGG/bumi-handbooks) ｜ PDF 版：[bumi-user-manual.pdf](bumi-user-manual.pdf)
 >
 > 本文件由 LaTeX 工程 `user-manual/` 的章节源码逐段转换而成，内容与 PDF（39 页）一致，供全文检索与 AI 阅读使用。
 

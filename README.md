@@ -4,8 +4,8 @@
 
 | 手册 | 阅读版 | Markdown 全文 | 源码 | 篇幅 |
 | --- | --- | --- | --- | --- |
-| Bumi 机器人笔记本外挂部署手册 | [bumi-deploy-handbook.pdf](bumi-deploy-handbook.pdf) | [bumi-deploy-handbook.md](deploy-handbook/bumi-deploy-handbook.md) | [deploy-handbook/](deploy-handbook/) | 40 页 |
-| Bumi 机器人综合使用手册 | [bumi-user-manual.pdf](bumi-user-manual.pdf) | [bumi-user-manual.md](user-manual/bumi-user-manual.md) | [user-manual/](user-manual/) | 39 页 |
+| Bumi 机器人笔记本外挂部署手册 | [bumi-deploy-handbook.pdf](bumi-deploy-handbook.pdf) | [bumi-deploy-handbook.md](bumi-deploy-handbook.md) | [deploy-handbook/](deploy-handbook/) | 40 页 |
+| Bumi 机器人综合使用手册 | [bumi-user-manual.pdf](bumi-user-manual.pdf) | [bumi-user-manual.md](bumi-user-manual.md) | [user-manual/](user-manual/) | 39 页 |
 
 两本手册都可以直接下载根目录下的 PDF 阅读；需要改内容时进入对应子目录重新编译。每本手册另有一份 Markdown 全文，内容与 PDF 一致，方便全文检索、在线预览和交给 AI 阅读。
 
@@ -41,10 +41,10 @@ Copy-Item user-manual\_build\main.pdf     bumi-user-manual.pdf
 
 ## Markdown 全文
 
-每本手册的 Markdown 全文由对应的 LaTeX 源码逐节转换而来，章节结构与 PDF 相同，附有可跳转的目录：
+每本手册的 Markdown 全文由对应的 LaTeX 源码逐节转换而来，章节结构与 PDF 相同，附有可跳转的目录，与 PDF 一样放在仓库根目录：
 
-- [deploy-handbook/bumi-deploy-handbook.md](deploy-handbook/bumi-deploy-handbook.md) —— 部署手册，9 章 + 3 个附录
-- [user-manual/bumi-user-manual.md](user-manual/bumi-user-manual.md) —— 综合使用手册，10 章 + 3 个附录
+- [bumi-deploy-handbook.md](bumi-deploy-handbook.md) —— 部署手册，9 章 + 3 个附录
+- [bumi-user-manual.md](bumi-user-manual.md) —— 综合使用手册，10 章 + 3 个附录
 - [deploy-handbook/quickstart-walkthrough.md](deploy-handbook/quickstart-walkthrough.md) —— 部署手册成书前的分步速查（9 步流程 + FAQ）
 
 正文、代码块和表格都按原样保留；PDF 中的示意图改用 Mermaid 或纯文本框图表达。改动 LaTeX 正文后，Markdown 需要同步更新。
@@ -55,8 +55,10 @@ Copy-Item user-manual\_build\main.pdf     bumi-user-manual.pdf
 .
 ├── bumi-deploy-handbook.pdf    部署手册阅读版
 ├── bumi-user-manual.pdf        综合手册阅读版
-├── deploy-handbook/            部署手册 LaTeX 源码 + Markdown 全文
-├── user-manual/                综合手册 LaTeX 源码 + Markdown 全文
+├── bumi-deploy-handbook.md     部署手册 Markdown 全文
+├── bumi-user-manual.md         综合手册 Markdown 全文
+├── deploy-handbook/            部署手册 LaTeX 源码
+├── user-manual/                综合手册 LaTeX 源码
 └── LICENSE                     MIT
 ```
 
