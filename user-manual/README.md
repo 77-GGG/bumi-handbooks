@@ -2,9 +2,9 @@
 
 将 Bumi 官方综合文档按“认识硬件 → 日常操作 → 准备开发环境 → 调用接口 → 故障排查”重新组织的中文 LaTeX 手册，适合初次使用 Bumi 和准备开展 SDK 开发的读者。
 
-**[阅读 PDF](../bumi-user-manual.pdf)** · [MIT 许可证](LICENSE) · [来源与第三方声明](THIRD_PARTY_NOTICES.md)
+**[阅读 PDF](../bumi-user-manual.pdf)** · **[Markdown 全文](bumi-user-manual.md)** · [MIT 许可证](LICENSE) · [来源与第三方声明](THIRD_PARTY_NOTICES.md)
 
-本手册是 [Bumi 机器人中文文档](../README.md) 合集之一，源码位于仓库的 `user-manual/` 子目录。
+本手册是 [Bumi 机器人中文文档](../README.md) 合集之一，源码位于仓库的 `user-manual/` 子目录。同目录的 `bumi-user-manual.md` 是与 PDF 内容一致的 Markdown 全文，便于全文检索和 AI 阅读。
 
 ## 内容
 

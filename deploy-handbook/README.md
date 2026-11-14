@@ -2,9 +2,9 @@
 
 面向使用 Ubuntu 笔记本部署 Bumi 运动策略的中文手册。以 `examples/py/test_policy.py` 为主线，先介绍终端、Python、Conda 与网络，再完成 SDK 编译、网线连接、手柄配置、程序启动和退出。
 
-**[阅读 PDF](../bumi-deploy-handbook.pdf)** · [MIT 许可证](LICENSE) · [来源与第三方声明](THIRD_PARTY_NOTICES.md)
+**[阅读 PDF](../bumi-deploy-handbook.pdf)** · **[Markdown 全文](bumi-deploy-handbook.md)** · [MIT 许可证](LICENSE) · [来源与第三方声明](THIRD_PARTY_NOTICES.md)
 
-本手册是 [Bumi 机器人中文文档](../README.md) 合集之一，源码位于仓库的 `deploy-handbook/` 子目录。
+本手册是 [Bumi 机器人中文文档](../README.md) 合集之一，源码位于仓库的 `deploy-handbook/` 子目录。同目录的 `bumi-deploy-handbook.md` 是与 PDF 内容一致的 Markdown 全文，便于全文检索和 AI 阅读；`quickstart-walkthrough.md` 是成书前整理的分步速查（9 步流程 + FAQ）。
 
 ## 内容
 
