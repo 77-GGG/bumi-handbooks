@@ -1,0 +1,52 @@
+\chapter{目标与整体链路}
+\setchapterheader{第一章\quad 目标与整体链路}
+\label{chap:overview}
+\begin{intro}
+\begin{itemize}
+\item 明确虚拟机需要达到的网络状态。
+\item 认识直连链路中的地址、掩码与网卡。
+\item 了解桥接与共享网络的区别。
+\end{itemize}
+\end{intro}
+配置的目标只有一个：虚拟机通过网线与 Bumi 运控板（\code{192.168.55.102}）直连通信。虚拟机本身使用 \code{192.168.55.101}，子网掩码 \code{255.255.255.0}（即 \code{/24}），示例网卡名为 \code{enp0s5}。
+
+\section{关键参数}
+\label{sec:parameters}
+\begin{longtable}{@{}P{0.24\linewidth}P{0.30\linewidth}P{0.40\linewidth}@{}}
+\toprule
+\textbf{项目} & \textbf{值} & \textbf{说明} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{项目} & \textbf{值} & \textbf{说明} \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+运控板 IP & \code{192.168.55.102} & 直连通信的目标地址 \\
+虚拟机地址 & \code{192.168.55.101} & 子网掩码 \code{255.255.255.0}（\code{/24}） \\
+网卡名 & \code{enp0s5} & 以 \code{ip -brief addr show} 实际输出为准 \\
+虚拟机软件 & Parallels Desktop（Windows 端为 VMware） & 网络均设置为\textbf{桥接模式} \\
+通信中间件 & CycloneDDS RTPS & 端口范围 \code{7400:7610/udp} \\
+\end{longtable}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[box/.style={draw=blue!50!black,thick,rounded corners=3pt,fill=blue!6,inner sep=6pt,text width=3.6cm,align=center,font=\small}]
+\node[box] (vm) {虚拟机 Ubuntu\\桥接网络（Bridged）\\\code{192.168.55.101/24}\\网卡 \code{enp0s5}};
+\node[box,right=2.6cm of vm] (board) {Bumi 运控板\\\code{192.168.55.102}};
+\draw[<->,thick,blue!55!black] (vm) -- node[above,font=\scriptsize,align=center]{网线直连 / 桥接到物理网卡\\CycloneDDS UDP 7400--7610} (board);
+\end{tikzpicture}
+\caption{虚拟机桥接后与运控板的直连链路。}
+\label{fig:link}
+\end{figure}
+
+\section{为什么必须桥接}
+\label{sec:why-bridge}
+虚拟机软件默认把网卡接在 NAT 或共享网络上。此时虚拟机会拿到 \code{10.211.55.x} 一类的私有地址，经过宿主机做地址转换后再访问外部，机器人所在的 \code{192.168.55.0/24} 网段对它并不可见，也就不可能直连。
+
+桥接模式把虚拟机网卡直接接到宿主机的物理网卡上，使虚拟机成为该物理网段中的一台独立主机。这样虚拟机才能配置 \code{192.168.55.101}，并与 \code{192.168.55.102} 直接收发报文。
+
+\begin{remark}{桥接到哪块网卡}
+一定要选择\textbf{插了机器人网线的那块物理网卡}，而不是“默认适配器”。选错会桥接到 Wi-Fi，虚拟机拿不到机器人网段的地址。
+\end{remark}

@@ -1,0 +1,50 @@
+\chapter{放行端口并测试连通}
+\setchapterheader{第四章\quad 放行端口并测试连通}
+\label{chap:firewall}
+\begin{intro}
+\begin{itemize}
+\item 检查并放行 DDS 通信所需的 UDP 端口。
+\item 用 ping 和 ARP 表确认到运控板的链路。
+\end{itemize}
+\end{intro}
+在运行控制程序之前，先确认主机防火墙没有拦截 DDS 通信，再从网络层验证到机器人是否可达。
+
+\section{第 8 步：放行 DDS 通信端口}
+\label{step:8}
+\begin{command}
+sudo ufw status verbose
+\end{command}
+
+如果显示 \code{Status: active}，执行：
+
+\begin{command}
+sudo ufw allow 7400:7610/udp comment 'CycloneDDS RTPS'
+sudo ufw allow 22/tcp
+sudo ufw reload
+sudo ufw status numbered
+\end{command}
+
+\begin{expected}
+\begin{itemize}
+\item 规则列表中出现 \code{7400:7610/udp} 与 \code{22/tcp}。
+\item 若防火墙本就未启用，可跳过本步。
+\end{itemize}
+\end{expected}
+
+\section{第 9 步：测试能否连上机器人}
+\label{step:9}
+\begin{command}
+ping -c 3 192.168.55.102
+ip neigh show dev enp0s5
+\end{command}
+
+\begin{expected}
+\begin{itemize}
+\item ping 应有 0\% packet loss。
+\item ARP 表里能看到 \code{192.168.55.102} 对应的 MAC 地址。
+\end{itemize}
+\end{expected}
+
+\begin{faq}{ping 不通}
+检查网线、机器人是否上电、双方掩码是否都是 \code{/24}、桥接网卡是否选错。
+\end{faq}

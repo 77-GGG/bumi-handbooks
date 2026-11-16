@@ -1,0 +1,29 @@
+\chapter{运行程序验证 DDS 通信}
+\setchapterheader{第五章\quad 运行程序验证 DDS 通信}
+\label{chap:verify}
+\begin{intro}
+\begin{itemize}
+\item 在虚拟机中运行示例程序。
+\item 通过初始化日志确认与机器人通信成功。
+\end{itemize}
+\end{intro}
+网络层通了以后，最后一步是用示例程序验证 DDS 通信。
+
+\section{第 10 步：运行程序验证 DDS 通信}
+\label{step:10}
+运行部署程序以验证通信是否正常，例如：
+
+\begin{command}
+cd /home/parallels/21.Bumi_sdk
+sudo ./build/example_policy_keyboard
+\end{command}
+
+\begin{expected}
+\begin{itemize}
+\item 终端出现 \code{[DEBUG]: init finish}，表示和机器人通信成功。
+\end{itemize}
+\end{expected}
+
+\begin{faq}{ping 通但程序卡在 \code{SDK\_VERSION} 后}
+第 8 步端口没放行；再检查 \code{config/dds.xml} 里的 \code{<Peer address="192.168.55.102"/>}。
+\end{faq}

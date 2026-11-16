@@ -1,0 +1,21 @@
+\chapter{常见故障速查}
+\setchapterheader{附录 A\quad 常见故障速查}
+\label{app:troubleshooting}
+下表汇总前面各步骤最容易出现的问题，可按现象直接定位。
+
+\begin{longtable}{@{}P{0.30\linewidth}P{0.64\linewidth}@{}}
+\toprule
+\textbf{现象} & \textbf{处理} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{现象} & \textbf{处理} \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+\code{ip addr} 还是 \code{10.211.55.x} & 第 2 步的桥接没生效，重新选物理网卡并重启虚拟机 \\
+\code{ip route} 里没有 \code{192.168.55.0/24} & 第 6 步没有真正生效，重新 \code{sudo netplan apply}，检查缩进 \\
+ping 不通 & 检查网线、机器人是否上电、双方掩码是否都是 \code{/24}、桥接网卡是否选错 \\
+ping 通但程序卡在 \code{SDK\_VERSION} 后 & 第 8 步端口没放行；再检查 \code{config/dds.xml} 里的 \code{<Peer address="192.168.55.102"/>} \\
+\end{longtable}

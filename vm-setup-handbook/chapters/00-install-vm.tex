@@ -1,0 +1,93 @@
+\chapter*{安装虚拟机}
+\addcontentsline{toc}{chapter}{第零章\quad 安装虚拟机}
+\setchapterheader{第零章\quad 安装虚拟机}
+\label{chap:install}
+\begin{intro}
+\begin{itemize}
+\item 按主机 CPU 架构选择虚拟机软件与 Ubuntu 镜像。
+\item 新建虚拟机并完成 Ubuntu 安装。
+\item 确认系统版本与网络初始状态。
+\end{itemize}
+\end{intro}
+开始配置网络之前，先在主机上装好虚拟机软件并新建一台 Ubuntu 虚拟机。虚拟机软件和 Ubuntu 镜像都要与主机的 CPU 架构对应，否则会出现装不上或运行极慢的情况。
+
+\section{第 0 步：按主机架构选择软件与镜像}
+\label{step:0}
+先确认主机的 CPU 架构，再按下表选择：
+
+\begin{longtable}{@{}P{0.22\linewidth}P{0.24\linewidth}P{0.44\linewidth}@{}}
+\toprule
+\textbf{主机系统} & \textbf{CPU 架构} & \textbf{虚拟机软件与 Ubuntu 镜像} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{主机系统} & \textbf{CPU 架构} & \textbf{虚拟机软件与 Ubuntu 镜像} \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+Windows & x86\_64 & \textbf{VMware}；Ubuntu 22.04.5 \textbf{amd64} 桌面版 \\
+MacOS（Apple Silicon） & arm & \textbf{Parallels Desktop}；Ubuntu 22.04.5，\textbf{镜像由 Parallels Desktop 直接提供} \\
+\end{longtable}
+
+\begin{remark}{架构不能混用}
+x86\_64 主机要用 amd64 镜像，arm 主机要用 arm64 镜像。在 Apple Silicon 上运行 amd64 镜像只能靠指令翻译，速度慢且容易出错，因此 Parallels Desktop 直接提供适配 arm 架构的 Ubuntu 22.04.5 镜像，用它即可。
+\end{remark}
+
+\section{Windows x86\_64：使用 VMware 与 amd64 镜像}
+\label{sec:win-vmware}
+\begin{enumerate}
+\item 安装 VMware（VMware Workstation Player 或 Pro）。
+\item 下载 Ubuntu 22.04.5 桌面版 amd64 镜像：
+\begin{command}
+https://mirrors.tuna.tsinghua.edu.cn/ubuntu-releases/22.04/ubuntu-22.04.5-desktop-amd64.iso
+\end{command}
+\item 在 VMware 中新建虚拟机，选择「安装程序光盘映像文件」，指向下载好的 \code{ubuntu-22.04.5-desktop-amd64.iso}。
+\item 按向导分配磁盘与内存（建议磁盘不少于 40\,GB，内存不少于 4\,GB），完成 Ubuntu 安装。
+\end{enumerate}
+
+\begin{expected}
+\begin{itemize}
+\item Ubuntu 22.04.5 桌面正常启动，能登录并打开终端。
+\item 终端执行 \code{uname -m} 输出 \code{x86\_64}。
+\end{itemize}
+\end{expected}
+
+\section{MacOS（Apple Silicon）：使用 Parallels Desktop}
+\label{sec:mac-parallels}
+\begin{enumerate}
+\item 安装 Parallels Desktop。
+\item 新建虚拟机时，Parallels Desktop 会在「免费系统」列表中\textbf{直接提供 Ubuntu 22.04.5 镜像}，选择它即可，无需自己下载。
+\item 按向导分配磁盘与内存，完成 Ubuntu 安装。
+\end{enumerate}
+
+\begin{expected}
+\begin{itemize}
+\item Ubuntu 22.04.5 桌面正常启动，能登录并打开终端。
+\item 终端执行 \code{uname -m} 输出 \code{aarch64}。
+\end{itemize}
+\end{expected}
+
+\section{安装完成后的检查}
+\label{sec:post-install}
+在虚拟机终端里确认系统版本与网卡情况：
+
+\begin{command}
+lsb_release -a
+uname -m
+ip -brief addr show
+\end{command}
+
+\begin{expected}
+\begin{itemize}
+\item 系统版本显示 Ubuntu 22.04.5 LTS。
+\item 能列出至少一块网卡；此时地址通常还在 \code{10.211.55.x} 一类的共享网段，属于初始状态，第二章会把它改成桥接。
+\end{itemize}
+\end{expected}
+
+\begin{faq}{Parallels Desktop 里找不到 Ubuntu 镜像}
+在「新建虚拟机」窗口的免费系统列表中查找 Ubuntu 22.04.5；若列表未加载，确认软件已联网并登录，再重开新建向导。
+\end{faq}
+\begin{faq}{下载的 iso 装不上或运行极慢}
+镜像架构与主机 CPU 不匹配。Windows x86\_64 请用 amd64 镜像，Apple Silicon 请用 Parallels Desktop 提供的 arm 镜像。
+\end{faq}

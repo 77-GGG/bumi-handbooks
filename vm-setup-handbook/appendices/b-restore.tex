@@ -1,0 +1,11 @@
+\chapter{恢复原配置}
+\setchapterheader{附录 B\quad 恢复原配置}
+\label{app:restore}
+不再需要直连时，可以恢复备份的网络配置，并把虚拟机网络模式改回共享网络。
+
+\begin{command}
+sudo cp /etc/netplan/00-installer-config.yaml.bak /etc/netplan/00-installer-config.yaml
+sudo netplan apply
+\end{command}
+
+再把 Parallels 网络模式改回「共享网络」。

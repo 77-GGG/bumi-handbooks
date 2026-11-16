@@ -1,0 +1,49 @@
+\chapter{把虚拟机网络改为桥接}
+\setchapterheader{第二章\quad 把虚拟机网络改为桥接}
+\label{chap:bridge}
+\begin{intro}
+\begin{itemize}
+\item 先关机再改网络，避免配置中途断开。
+\item 在 Parallels 中把网络源改为桥接，并指定物理网卡。
+\item Windows 端 VMware 同样使用桥接模式。
+\end{itemize}
+\end{intro}
+改网络设置前先关闭虚拟机。运行中修改网络适配器，可能导致配置只写入一半就断开。
+
+\section{第 1 步：关闭虚拟机}
+\label{step:1}
+在虚拟机终端执行：
+
+\begin{command}
+sudo poweroff
+\end{command}
+
+\begin{expected}
+\begin{itemize}
+\item 虚拟机正常关机，Parallels 控制中心中该虚拟机状态变为已停止。
+\end{itemize}
+\end{expected}
+
+\section{第 2 步：Parallels 中把网络改为桥接}
+\label{step:2}
+\begin{enumerate}
+\item 打开 Parallels Desktop 控制中心，选中该虚拟机，点击齿轮图标打开「配置」。
+\item 左侧选择「硬件」→「网络 1」。
+\item 「源」下拉框选择 \textbf{桥接网络（Bridged Network）}。
+\item 「桥接到」下拉框选择\textbf{插了机器人网线的那块物理网卡}（如 Ethernet、en0、USB 网卡）。（经测试，网卡名称为 AX88179B）不要选「默认适配器」，否则可能桥接到 Wi-Fi 上。
+\item 点击「确定」。
+\item Windows 端使用 VMware，依然是将网络设置为桥接模式，让虚拟机直接访问机器人运控板上的网卡。
+\end{enumerate}
+
+\begin{expected}
+\begin{itemize}
+\item 网络源显示为「桥接网络」，桥接目标为插了机器人网线的物理网卡。
+\end{itemize}
+\end{expected}
+
+\begin{faq}{不知道桥接到哪块网卡}
+在宿主机上查看正在使用的那块有线网卡。Parallels 会把它列在「桥接到」下拉框中；名称可能是 Ethernet、en0 或具体的 USB 网卡型号（如 AX88179B）。
+\end{faq}
+\begin{faq}{只有 Wi-Fi，没有有线网卡}
+桥接需要一块有线物理网卡来承载机器人网线。请用 USB 转以太网网卡，并把机器人网线插到该网卡上。
+\end{faq}

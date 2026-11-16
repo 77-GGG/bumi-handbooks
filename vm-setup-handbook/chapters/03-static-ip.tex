@@ -1,0 +1,113 @@
+\chapter{配置静态地址}
+\setchapterheader{第三章\quad 配置静态地址}
+\label{chap:static}
+\begin{intro}
+\begin{itemize}
+\item 启动虚拟机并确认有线网卡名称。
+\item 备份 netplan 配置，写入地址 \code{192.168.55.101/24}。
+\item 应用配置并确认地址与路由生效。
+\end{itemize}
+\end{intro}
+虚拟机桥接后，需要把有线网卡的地址固定在 \code{192.168.55.0/24} 网段。Linux 上网络由 netplan 管理，修改前先备份原文件。
+
+\section{第 3 步：启动虚拟机并确认网卡名}
+\label{step:3}
+启动虚拟机，打开终端执行：
+
+\begin{command}
+ip -brief addr show
+\end{command}
+
+\begin{expected}
+\begin{itemize}
+\item 输出中能看到一个有线网卡，示例环境中其名称为 \code{enp0s5}。
+\item 若不是 \code{enp0s5}，后面命令里的 \code{enp0s5} 换成实际名字。
+\end{itemize}
+\end{expected}
+
+\section{第 4 步：备份网络配置文件}
+\label{step:4}
+\begin{command}
+sudo cp /etc/netplan/00-installer-config.yaml /etc/netplan/00-installer-config.yaml.bak
+\end{command}
+
+\begin{expected}
+\begin{itemize}
+\item 同目录下生成 \code{00-installer-config.yaml.bak}，恢复时使用。
+\end{itemize}
+\end{expected}
+
+\section{第 5 步：设置 IPv4 地址和子网掩码}
+\label{step:5}
+\begin{command}
+sudo nano /etc/netplan/00-installer-config.yaml
+\end{command}
+
+把内容改成（\textbf{只能用空格缩进，每级 2 个空格，不能用 Tab}）：
+
+\begin{command}
+network:
+  version: 2
+  ethernets:
+    enp0s5:
+      dhcp4: true
+      addresses: [192.168.55.101/24]
+\end{command}
+
+说明：\code{/24} 就是子网掩码 \code{255.255.255.0}。不要写 \code{gateway4} 或默认网关，直连没有路由器，写了会导致虚拟机断网。
+
+保存退出（Ctrl+O 回车，Ctrl+X）。
+
+\section{第 6 步：应用配置}
+\label{step:6}
+\begin{command}
+sudo netplan try
+\end{command}
+
+无报错则按回车确认；然后：
+
+\begin{command}
+sudo netplan apply
+\end{command}
+
+如果 \code{netplan try} 报语法错误，说明缩进不对，重新按第 5 步检查。
+
+（如果只想临时试一下、不写配置文件，可以用这条，重启后失效：）
+
+\begin{command}
+sudo ip addr add 192.168.55.101/24 dev enp0s5
+\end{command}
+
+\begin{expected}
+\begin{itemize}
+\item \code{netplan try} 无报错，回车后配置保留；\code{netplan apply} 退出码为 0。
+\end{itemize}
+\end{expected}
+
+\section{第 7 步：确认地址和掩码已生效}
+\label{step:7}
+\begin{command}
+ip -brief addr show enp0s5
+ip route
+\end{command}
+
+应看到：
+
+\begin{command}
+enp0s5   UP   192.168.55.101/24
+192.168.55.0/24 dev enp0s5 proto kernel scope link src 192.168.55.101
+\end{command}
+
+\begin{expected}
+\begin{itemize}
+\item 网卡地址为 \code{192.168.55.101/24}。
+\item 路由表中存在 \code{192.168.55.0/24} 且出口为 \code{enp0s5}。
+\end{itemize}
+\end{expected}
+
+\begin{faq}{\code{ip addr} 还是 \code{10.211.55.x}}
+第 2 步的桥接没生效，重新选物理网卡并重启虚拟机。
+\end{faq}
+\begin{faq}{\code{ip route} 里没有 \code{192.168.55.0/24}}
+第 6 步没有真正生效，重新 \code{sudo netplan apply}，检查缩进。
+\end{faq}

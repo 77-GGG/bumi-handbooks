@@ -1,0 +1,40 @@
+% !TeX program = xelatex
+\documentclass[UTF8,a4paper,zihao=-4,openany,oneside,fontset=fandol]{ctexbook}
+\input{preamble}
+
+\begin{document}
+\begin{titlepage}
+\centering
+\vspace*{0.16\textheight}
+{\Huge\bfseries Bumi 机器人\par}
+\vspace{0.55cm}
+{\huge\bfseries 虚拟机连接配置手册\par}
+\vspace{1.0cm}
+{\large 祁果\par}
+\vspace{0.35cm}
+{\small\faGithub\ \href{https://github.com/77-GGG/bumi-handbooks}{\texttt{77-GGG/bumi-handbooks}}\par}
+\vspace{0.5cm}
+{\small\today\par}
+\vfill
+\end{titlepage}
+
+\frontmatter
+\input{frontmatter/preface}
+\clearpage
+\setchapterheader{目录}
+\tableofcontents
+
+\mainmatter
+\setchapterheader{正文}
+\input{chapters/00-install-vm}
+\input{chapters/01-overview}
+\input{chapters/02-bridge-network}
+\input{chapters/03-static-ip}
+\input{chapters/04-firewall-and-test}
+\input{chapters/05-verify-communication}
+
+\appendix
+\input{appendices/a-troubleshooting}
+\input{appendices/b-restore}
+
+\end{document}

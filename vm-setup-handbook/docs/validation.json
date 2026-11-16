@@ -1,0 +1,9 @@
+{
+  "pages": 19,
+  "engine": "XeLaTeX (TeX Live 2025)",
+  "latex_warnings": 0,
+  "overfull_boxes": 0,
+  "underfull_boxes": 0,
+  "hardware_execution": false,
+  "notes": "recorded when the VM setup handbook was added to the bumi-handbooks collection"
+}
